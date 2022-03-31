@@ -56,8 +56,21 @@ while True:
     elif opcion==4:
         pass
     elif opcion==5:
-        pass
+        posiciones_contactos = []
+        if not(agenda.agenda_vacia()):
+            nombre=input('Escribe el nombre del contacto para buscar')
+            posiciones_contactos = [x for x in range(len(agenda.dato)) if agenda.dato[x]['nombre']==nombre]
+            if len(posiciones_contactos)>0:
+                print('Se ha encontrado los siguientes contactos que se llamen:', nombre)
+                for x in posiciones_contactos:
+                    print('**************')
+                    print('Posicion',x,'')
+                    print(f'{agenda.dato[x]["nombre"]}\n{agenda.dato[x]["telefono"]}\n{agenda.dato[x]["email"]}')
+        else:
+            print('No se ha encontrado ningun contacto con el nombre',nombre)
     elif opcion==6:
-        pass
+        print('Saliendo de la agenda...')
+        exit()
+
     else:
         pass
