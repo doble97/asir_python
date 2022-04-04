@@ -36,6 +36,9 @@ class Agenda:
         pass
     def agenda_vacia(self)->bool:
         return len(self.dato)==0
+    def print_contacto(self, contacto):
+        print(f'***\n{x["nombre"]}\n{x["telefono"]}\n{x["email"]}\n***')
+
     
 agenda = Agenda()
 while True:
@@ -52,13 +55,25 @@ while True:
     elif opcion==2:
         agenda.lista_contacto()
     elif opcion==3:
-        pass
+        if not agenda.agenda_vacia():
+            nombre = input('Escribe el nombre del contacto a buscar: ')
+            contactos_encontrados = []
+            for x in agenda.dato:
+                if x['nombre']==nombre:
+                    contactos_encontrados.append(x)
+            if len(contactos_encontrados)>0:
+                print('Contactos encontrados serán listados:')
+                [agenda.print_contacto(x) for x in contactos_encontrados]
+            else:
+                print('No se ha encontrado ningun contacto con el nombre',nombre)
+        else:
+            print('No tienes contactos, no se puede buscar en la agenda')
     elif opcion==4:
         pass
     elif opcion==5:
         posiciones_contactos = []
         if not(agenda.agenda_vacia()):
-            nombre=input('Escribe el nombre del contacto para buscar')
+            nombre=input('Escribe el nombre del contacto para buscar: ')
             posiciones_contactos = [x for x in range(len(agenda.dato)) if agenda.dato[x]['nombre']==nombre]
             if len(posiciones_contactos)>0:
                 print('Se ha encontrado los siguientes contactos que se llamen:', nombre)
